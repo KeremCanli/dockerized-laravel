@@ -1,9 +1,9 @@
 services:
-    adminer:
-        container_name: adminer
-        image: adminer
-        ports:
-            - 8080:8080
+    #adminer:
+    #    container_name: adminer
+    #    image: adminer
+    #    ports:
+    #        - 8080:8080
     mysql:
         build: ./mysql
         command: --default-authentication-plugin=mysql_native_password
@@ -17,21 +17,24 @@ services:
         ports:
             - 8000:80
         volumes:
-            - ./project/laravel:/var/www/html
-    node.js:
-        build: ./node.js
-        container_name: node.js
-        command: >
-            sh -c "npm i && npm update && npm fund && npm audit fix && npm start"
-        ports:
-            - 4200:4200
-        volumes:
-            - ./project/node.js:/home/node/node.js-project
+            - ./project:/var/www/html
+    #node.js:
+    #    container_name: node.js
+    #    command: >
+    #        sh -c "npm i && npm update && npm audit fix && npm run dev && npm run hot"
+    #    expose:
+    #        - 4200
+    #    image: node
+    #    ports:
+    #        - 4200:4200
+    #    volumes:
+    #        - ./project:/home/node/node.js-project
+    #    working_dir: /home/node/node.js-project
     php-fpm:
         build: ./php-fpm
         command: >
-            sh -c "composer install && chmod 777 -R ./storage && docker-php-entrypoint php-fpm"
+            sh -c "composer install && composer update && docker-php-entrypoint php-fpm"
         container_name: php-fpm
         volumes:
-            - ./project/laravel:/var/www/html
+            - ./project:/var/www/html
 version: "3"
