@@ -9,4 +9,4 @@ COPY ./php.ini-production ./
 ARG USER_ID=1000
 RUN adduser --disabled-password --gecos GECOS --uid ${USER_ID} php-fpm
 USER php-fpm
-WORKDIR /var/www/html
+WORKDIR /var/www/html 
