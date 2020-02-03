@@ -4,6 +4,13 @@ services:
         image: adminer
         ports:
             - 8080:8080
+    composer:
+        build: ./composer
+        command: >
+            sh -c "composer && composer install && composer update && php artisan serve"
+        container_name: composer
+        volumes:
+            - ./project:/var/www/html
     mysql:
         build: ./mysql
         command: --default-authentication-plugin=mysql_native_password
@@ -32,8 +39,6 @@ services:
     #    working_dir: /home/node/node.js-project
     php-fpm:
         build: ./php-fpm
-        command: >
-            sh -c "composer install && composer update && docker-php-entrypoint php-fpm"
         container_name: php-fpm
         volumes:
             - ./project:/var/www/html
