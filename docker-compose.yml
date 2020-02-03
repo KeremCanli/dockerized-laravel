@@ -42,4 +42,4 @@ services:
         container_name: php-fpm
         volumes:
             - ./project:/var/www/html
-version: "3"
+version: "3" 
