@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/laravel_mix', function () {
+    return view('laravel-mix');
+});

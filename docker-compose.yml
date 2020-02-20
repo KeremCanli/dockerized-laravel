@@ -18,18 +18,15 @@ services:
             - 8000:80
         volumes:
             - ./project:/var/www/html
-    #node.js:
-    #    container_name: node.js
-    #    command: >
-    #        sh -c "npm i && npm update && npm audit fix && npm run dev && npm run hot"
-    #    expose:
-    #        - 4200
-    #    image: node
-    #    ports:
-    #        - 4200:4200
-    #    volumes:
-    #        - ./project:/home/node/node.js-project
-    #    working_dir: /home/node/node.js-project
+    node.js:
+        build: ./node.js
+        command: >
+            sh -c "npm i && npm update && npm audit fix && npm run hot"
+        container_name: node.js
+        ports:
+            - 8081:8081
+        volumes:
+            - ./project:/home/node/node.js-project
     php-fpm:
         build: ./php-fpm
         command: >
